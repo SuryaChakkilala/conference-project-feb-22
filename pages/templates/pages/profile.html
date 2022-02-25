@@ -1,6 +1,10 @@
 {% extends 'pages/main.html' %}
 
 {% block content %}
+{% for message in messages %}
+    {{message}}
+{% endfor %}
+
 {{user.username}}<br>
 {{user.email}}<br>
 {{user.first_name}}<br>
