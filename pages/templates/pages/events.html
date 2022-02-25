@@ -1,0 +1,22 @@
+{% extends 'pages/main.html' %}
+
+{% block content %}
+    <h1> Events </h1>
+    {% if events_list %}
+    {% for event in events_list %}
+        <div>
+            <h2>{{event.name}}</h2>
+            <p>{{event.description}}</p>
+            <p>Time: <b>{{event.event_start_time}} {% if event.event_end_time %}to {{event.event_end_time}}{% endif %} </b></p>
+            {% if user.is_authenticated %}
+                {% if event.webex_link %}
+                    <a href="{{event.webex_link}}">Webex</a>
+                {% endif %}
+                {% if event.youtube_live_link %}
+                    <a href="{{event.youtube_live_link}}">YT Live</a>
+                {% endif %}
+            {% endif %}
+        </div><br>
+    {% endfor %}
+    {% endif %}
+{% endblock %}
