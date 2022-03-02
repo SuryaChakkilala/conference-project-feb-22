@@ -11,6 +11,8 @@ from django.contrib.auth import login, logout, authenticate
 # Create your views here.
 
 def registerPage(request):
+    if request.user.is_authenticated:
+        return redirect('home')
     form = RegisterUserForm()
     if request.method == "POST":
         form = RegisterUserForm(request.POST)
@@ -43,6 +45,8 @@ def loginPage(request):
     return render(request, 'pages/login.html', context)
 
 def logoutUser(request):
+    if not request.user.is_authenticated:
+        return redirect('home')
     messages.success(request, f'{request.user} has been succesfully logged out.')
     logout(request)
     return redirect('login')
@@ -74,11 +78,13 @@ def contact(request):
     return render(request, 'pages/contact.html', context)
 
 def conferences(request):
-    events_list = Conference.objects.all()
-    context = {'events_list': events_list}
-    return render(request, 'pages/conferences.html', context)
+    if not request.user.is_authenticated:
+        messages.warning(request, 'Please login to view the conference.')
+        return redirect('login')
+    return render(request, 'pages/conferences.html')
 
 def paper_presentations(request):
-    events_list = PaperPresentation.objects.all()
-    context = {'events_list': events_list}
-    return render(request, 'pages/paper_presentations.html', context)
+    if not request.user.is_authenticated:
+        messages.warning(request, 'Please login to view the paper presentation.')
+        return redirect('login')
+    return render(request, 'pages/paper_presentations.html')

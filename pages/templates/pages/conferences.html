@@ -1,20 +1,12 @@
 {% extends 'pages/main.html' %}
 
+{% load static %}
+
 {% block content %}
-    <h1> Conferences </h1>
-    {% for event in events_list %}
-        <div>
-            <h2>{{event.name}}</h2>
-            <p>{{event.description}}</p>
-            <p>Time: <b>{{event.event_start_time}} {% if event.event_end_time %}to {{event.event_end_time}}{% endif %} </b></p>
-            {% if user.is_authenticated %}
-                {% if event.webex_link %}
-                    <a href="{{event.webex_link}}">Webex</a>
-                {% endif %}
-                {% if event.youtube_live_link %}
-                    <a href="{{event.youtube_live_link}}">YT Live</a>
-                {% endif %}
-            {% endif %}
-        </div><br>
-    {% endfor %}
+    <div class="conferenceeventpage">
+        <div class="videoframe">
+            <iframe width="560" height="315" class="videolive" src="https://www.youtube.com/embed/86YLFOog4GM?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <img class="bgimg" src="{% static 'images/confhall.jpg' %}"/>
+    </div>
 {% endblock %}

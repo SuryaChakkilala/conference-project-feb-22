@@ -1,4 +1,7 @@
-<h3>Register here</h3>
+{% extends 'pages/main.html' %}
+
+{% block content %}
+{% comment %} <h3>Register here</h3>
 <hr>
 
 <form action="" method="POST">
@@ -17,4 +20,55 @@
     {{form.password2}}<br>
     <button type="submit">Register Now</button>
     {{form.errors}}
-</form>
+</form> {% endcomment %}
+    <div class="wrapper">
+        <div class="title">
+          Registration 
+        </div>
+        <hr>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="form">
+                <div class="inputfield">
+                    {{form.first_name}}
+                </div> 
+                <div class="inputfield">
+                    {{form.last_name}}
+                </div>  
+                <div class="inputfield">
+                    {{form.username}}
+                </div> 
+                <div class="inputfield">
+                    {{form.email}}
+                </div> 
+                
+                <div class="inputfield">
+                    {{form.password1}}
+                </div>  
+                <div class="inputfield">
+                    {{form.password2}}
+                </div> 
+                <div class="title">
+                    <button class="btn btn-primary btn-btn-lg" type="submit">Register Now</button>
+                    {{form.errors}}
+                </div>
+                <div class="inputfield">
+                    <h5>Already registered?<a href="/login">login now</a></h5>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+    var form_fields = document.getElementsByTagName('input')
+        form_fields[1].placeholder='First Name..';
+        form_fields[2].placeholder='Last Name..';
+        form_fields[3].placeholder='Phone Number...';
+        form_fields[4].placeholder='Email Address...';
+        form_fields[5].placeholder='Password...';
+        form_fields[6].placeholder='Confirm Password...';
+
+        for (var field in form_fields){	
+        form_fields[field].className += ' form-control'
+        }
+    </script>
+{% endblock %}

@@ -1,16 +1,34 @@
-<h3>login</h3>
+{% extends 'pages/main.html' %}
 
-<form method="POST" action="">
-    {% csrf_token %}
-    <input type="text" name="username" placeholder="username..">
-    <input type="password" name="password" placeholder="password..">
-    <button type="submit">Login</button>
+{% block content %}
+    <div class="wrapper">
+        <div class="title">
+            Login
+        </div>
+        <hr>
+        <br>
+        <div class="form">
+            <form method="POST" action="">
+                {% csrf_token %}
+                <div class="inputfield">
+                    <input type="text" name="username" class="input" placeholder="Phone Number..">
+                </div> 
+            
+                <div class="inputfield">
+                <input type="password" class="input" name="password" placeholder="Password..">
+                </div>  
+                <div class="title">
+                    <button type="submit" class="px-5 btn btn-primary active">Log in</button>
+                </div><br>
 
-    {{form.errors}}
-    {% for message in messages  %}
-          <p id='messages'>{{message}}</p>
-    {% endfor %}
-</form>
+                {{form.errors}}
+                {% for message in messages  %}
+                    <p id='messages'>{{message}}</p>
+                {% endfor %}
+            </form>
 
-<p>Don't have an account? <a href="{% url 'register' %}">Signup here</a></p>
-<p>Forgot Password? <a href="{% url 'reset_password' %}">Forgot Password</a>
+            <p>Don't have an account? <a href="{% url 'register' %}">Signup</a></p>
+            <p>Forgot Password? <a href="{% url 'reset_password' %}">Reset Password</a>
+        </div>
+    </div>
+{% endblock %}
