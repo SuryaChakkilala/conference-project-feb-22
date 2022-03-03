@@ -81,12 +81,16 @@ def conferences(request):
     if not request.user.is_authenticated:
         messages.warning(request, 'Please login to view the conference.')
         return redirect('login')
-    return render(request, 'pages/conferences.html')
+    obj = Conference.objects.get()
+    context = {'link': obj.link}
+    return render(request, 'pages/conferences.html', context)
 
 def paper_presentations(request):
     if not request.user.is_authenticated:
         messages.warning(request, 'Please login to view the paper presentation.')
         return redirect('login')
+    obj = PaperPresentation.objects.get()
+    context = {'link': obj.link}
     return render(request, 'pages/paper_presentations.html')
 
 def virtual_tour(request):
