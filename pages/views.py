@@ -88,3 +88,6 @@ def paper_presentations(request):
         messages.warning(request, 'Please login to view the paper presentation.')
         return redirect('login')
     return render(request, 'pages/paper_presentations.html')
+
+def virtual_tour(request):
+    return render(request, 'pages/virtual_tour.html')
